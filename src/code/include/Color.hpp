@@ -5,9 +5,20 @@
 class Color {
 public:
   // member variable
-  float R;
-  float G;
-  float B;
+  double R;
+  double G;
+  double B;
   // Constructor
-  Color(float r, float g, float b):R(r), G(g), B(b){}
+  Color(double r, double g, double b);
 }; 
+
+
+Color operator+(const Color& c1, const Color& c2);
+
+Color operator-(const Color& c1, const Color& c2);
+
+Color operator*(double t, const Color& c);
+
+Color operator*(const Color& c, double t);
+
+Color operator/(const Color& c, double t);

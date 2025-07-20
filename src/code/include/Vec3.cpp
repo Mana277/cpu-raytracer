@@ -1,6 +1,10 @@
 #include "Vec3.hpp" 
 #include <cmath>
 #include <iostream>
+#include <random>
+std::mt19937 gen(std::random_device{}());
+std::uniform_real_distribution<> dist(-1.0, 1.0);
+
 
 //--------------------------------
 //Constructor implementations
@@ -58,5 +62,26 @@ Vec3 unit_vector(const Vec3& v) {
         return v / std::sqrt(len);
     } else {
         return Vec3(); 
+    }
+}
+
+Vec3 random_unit_vector() {
+    while (1) {
+        double x = dist(gen);
+        double y = dist(gen);
+        double z = dist(gen);
+        Vec3 p(x,y,z);
+        double lensq = p.length_squared();
+        if (lensq <= 1)
+            return p / sqrt(lensq);
+    }
+}
+
+Vec3 random_on_hemisphere(const Vec3& normal) {
+    Vec3 on_unit_sphere = random_unit_vector();
+    if (dot(on_unit_sphere, normal) > 0.0){ // In the same hemisphere as the normal
+        return on_unit_sphere;
+    }else{
+        return (-1)*on_unit_sphere;
     }
 }

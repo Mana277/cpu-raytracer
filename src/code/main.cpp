@@ -5,6 +5,7 @@
 #include "ImageIO.hpp"
 #include "ImageUtils.hpp"
 #include "Camera.hpp"
+#include "Color.hpp"
 #include "Sphere.hpp"
 #include "Hittable.hpp"
 #include "Hittable_list.hpp"
@@ -18,8 +19,8 @@ int main() {
     Hit_record rec;
 
     // Image settings
-    int image_width = 1920;  // Test Options: 640, 1920, 7680
-    int image_height = 1080; // Test Options: 360, 1080, 4320
+    int image_width = 640;  // Test Options: 640, 1920, 7680
+    int image_height = 360; // Test Options: 360, 1080, 4320
     int c = 3; // Number of color channels (RGB)
 
     // Camera settings
@@ -37,7 +38,7 @@ int main() {
     world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100, Color(0, 1, 0))); // Green ground sphere
 
     // Rendering
-    Image<float> img = Render(image_width, image_height, c, cam, world);
+    Image<double> img = Render(image_width, image_height, c, cam, world);
 
     // Write output to file
     Image<unsigned char> buffer = convert_to_uchar(img);

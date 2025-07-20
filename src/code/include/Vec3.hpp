@@ -39,3 +39,7 @@ double dot(const Vec3& v1, const Vec3& v2);
 Vec3 cross(const Vec3& v1, const Vec3& v2);
 
 Vec3 unit_vector(const Vec3& v);
+
+Vec3 random_unit_vector();
+
+Vec3 random_on_hemisphere(const Vec3& normal); 

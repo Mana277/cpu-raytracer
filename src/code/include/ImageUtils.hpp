@@ -3,4 +3,4 @@
 
 // Header contents
 
-Image<unsigned char> convert_to_uchar(const Image<float>& float_img);
+Image<unsigned char> convert_to_uchar(const Image<double>& double_img);
