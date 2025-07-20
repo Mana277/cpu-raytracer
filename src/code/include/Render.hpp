@@ -1,18 +1,32 @@
 #pragma once 
 #include "Color.hpp"
+#include "Ray.hpp"
+#include "Vec3.hpp"
 #include "Utils.hpp"
+#include "Hittable_list.hpp"
 #include <cstdio>
 
 // Header contents
+Color Calculate_color(const Ray& target, const Camera& cam, const Hittable_list& world){
+    Color color1(1.0, 1.0, 1.0);
+    Color color2(0.5, 0.7, 1.0);
+    Hit_record rec;
+    if (world.hitRay(target, cam.getRay_t(), rec)){
+        Vec3 N_u = rec.N;
+        return Color(0.5 * (N_u.x + 1),0.5 * (N_u.y + 1),0.5 * (N_u.z + 1));
+    } else {
+        const Vec3 unit_direction = unit_vector(target.getDir());
+        double a = 0.5 * (unit_direction.y + 1.0);
+        return (1.0-a)*color1 + a*color2;
+    }
+};
 
-Image<double> Render(int image_width, int image_height, int channnels, const Camera& cam, const Hittable& world) {
+Image<double> Render(int image_width, int image_height, int channnels, const Camera& cam, const Hittable_list& world) {
     // Constants
     const double infinity = std::numeric_limits<double>::infinity();
     const Interval ray_t(0.0001, infinity);
-    const int samples = 1;
-    Hit_record rec;
-    Color color1(1.0, 1.0, 1.0);
-    Color color2(0.5, 0.7, 1.0);
+    const int samples = 5;
+    
 
     // Class to store pixel color information (normalized)
     Image<double> img(image_width, image_height, 3);
@@ -24,8 +38,6 @@ Image<double> Render(int image_width, int image_height, int channnels, const Cam
             Color color(0,0,0);
             
             for(int i=0; i < samples; i++){
-                Color color1(1.0, 1.0, 1.0);
-                Color color2(0.5, 0.7, 1.0);
                 double ram_h = random(0,1.0);
                 double ram_v = random(0,1.0);
                 // Generate ray
@@ -34,16 +46,7 @@ Image<double> Render(int image_width, int image_height, int channnels, const Cam
                 Ray target = cam.getRay(h,v);
 
                 // calculate color
-                if (world.hitRay(target, cam.getRay_t(), rec)){
-                    Vec3 N_u = rec.N;
-                    color.R = color.R + 0.5 * (N_u.x + 1);
-                    color.G = color.G + 0.5 * (N_u.y + 1);
-                    color.B = color.B + 0.5 * (N_u.z + 1);
-                } else {
-                    const Vec3 unit_direction = unit_vector(target.getDir());
-                    double a = 0.5 * (unit_direction.y + 1.0);
-                    color = (1.0-a)*color1 + a*color2;
-                }
+                color = color + Calculate_color(target, cam, world);
             }
             color = color / samples;
 

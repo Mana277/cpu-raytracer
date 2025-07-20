@@ -2,9 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <random>
-std::mt19937 gen(std::random_device{}());
-std::uniform_real_distribution<> dist(-1.0, 1.0);
-
+#include "Utils.hpp"
 
 //--------------------------------
 //Constructor implementations
@@ -67,9 +65,9 @@ Vec3 unit_vector(const Vec3& v) {
 
 Vec3 random_unit_vector() {
     while (1) {
-        double x = dist(gen);
-        double y = dist(gen);
-        double z = dist(gen);
+        double x = random(-1.0,1.0);
+        double y = random(-1.0,1.0);
+        double z = random(-1.0,1.0);
         Vec3 p(x,y,z);
         double lensq = p.length_squared();
         if (lensq <= 1)
