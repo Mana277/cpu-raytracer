@@ -70,7 +70,7 @@ Vec3 random_unit_vector() {
         double z = random(-1.0,1.0);
         Vec3 p(x,y,z);
         double lensq = p.length_squared();
-        if (lensq <= 1)
+        if (1e-160 < lensq && lensq <= 1)
             return p / sqrt(lensq);
     }
 }
