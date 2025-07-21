@@ -7,14 +7,14 @@
 #include <cstdio>
 
 // Header contents
-Color Calculate_color(const Ray& target, const Camera& cam, const Hittable_list& world){
-    Color color1(1.0, 1.0, 1.0);
-    Color color2(0.5, 0.7, 1.0);
+Color Calculate_color(const Ray& target, const Camera& cam, const Hittable_list& world, int depth){
     Hit_record rec;
-    if (world.hitRay(target, cam.getRay_t(), rec)){
-        Vec3 N_u = rec.N;
-        return Color(0.5 * (N_u.x + 1),0.5 * (N_u.y + 1),0.5 * (N_u.z + 1));
+    if (world.hitRay(target, cam.getRay_t(), rec) && depth >= 0 ){
+        Vec3 N_u = random_on_hemisphere(rec.N);
+        return 0.5*Calculate_color(Ray(rec.P,N_u), cam,world ,depth - 1);
     } else {
+        Color color1(1.0, 1.0, 1.0);
+        Color color2(0.5, 0.7, 1.0);
         const Vec3 unit_direction = unit_vector(target.getDir());
         double a = 0.5 * (unit_direction.y + 1.0);
         return (1.0-a)*color1 + a*color2;
@@ -26,6 +26,7 @@ Image<double> Render(int image_width, int image_height, int channnels, const Cam
     const double infinity = std::numeric_limits<double>::infinity();
     const Interval ray_t(0.0001, infinity);
     const int samples = 5;
+    const int Max_depth = 50;
     
 
     // Class to store pixel color information (normalized)
@@ -46,7 +47,7 @@ Image<double> Render(int image_width, int image_height, int channnels, const Cam
                 Ray target = cam.getRay(h,v);
 
                 // calculate color
-                color = color + Calculate_color(target, cam, world);
+                color = color + Calculate_color(target, cam, world, Max_depth);
             }
             color = color / samples;
 

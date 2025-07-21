@@ -19,8 +19,8 @@ int main() {
     Hit_record rec;
 
     // Image settings
-    int image_width = 640;  // Test Options: 640, 1920, 7680
-    int image_height = 360; // Test Options: 360, 1080, 4320
+    int image_width = 1920;  // Test Options: 640, 1920, 7680
+    int image_height = 1080; // Test Options: 360, 1080, 4320
     int c = 3; // Number of color channels (RGB)
 
     // Camera settings
