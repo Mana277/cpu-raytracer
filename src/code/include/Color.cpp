@@ -3,6 +3,7 @@
 //--------------------------------
 //Constructor implementations
 //--------------------------------
+Color::Color() : R(0), G(0), B(0) {}
 Color::Color(double r, double g, double b) : R(r), G(g), B(b) {}
 
 //--------------------------------
@@ -23,6 +24,10 @@ Color operator*(double t, const Color& c) {
 
 Color operator*(const Color& c, double t) {
     return t * c; 
+}
+
+Color operator*(const Color& c1, const Color& c2){
+    return Color(c1.R*c2.R, c1.G*c2.G, c1.B*c2.B);
 }
 
 Color operator/(const Color& c, double t) {

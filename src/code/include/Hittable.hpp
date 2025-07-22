@@ -12,6 +12,7 @@ class Hit_record {
     Vec3 N;
     double T;
     bool front_face;
+    Color color;
 
     // member function
     void set_face_normal(const Ray& r, const Vec3& outward_normal) {

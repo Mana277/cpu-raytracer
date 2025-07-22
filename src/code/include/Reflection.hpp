@@ -29,10 +29,13 @@ Color Lambertian_Calculate_color(const Ray& target, const Camera& cam, const Hit
     if (depth < 0){
         return Color(0,0,0);
     }
-
+    
     if (world.hitRay(target, cam.getRay_t(), rec)){
         Vec3 N_u = rec.N + random_unit_vector();
-        return 0.5*Lambertian_Calculate_color(Ray(rec.P,N_u), cam,world ,depth - 1);
+        if (N_u.near_zero()) {
+            N_u = rec.N;
+        }
+        return rec.color*Lambertian_Calculate_color(Ray(rec.P,N_u), cam,world ,depth - 1);
     } else {
         Color color1(1.0, 1.0, 1.0);
         Color color2(0.5, 0.7, 1.0);
