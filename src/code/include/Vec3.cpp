@@ -23,6 +23,11 @@ double Vec3::length() const {
     return std::sqrt(length_squared());
 }
 
+bool  Vec3::near_zero() const{
+    const double s = 1e-8;
+    return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
+}
+
 Vec3 operator+(const Vec3& v1, const Vec3& v2) {
     return Vec3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
@@ -83,3 +88,4 @@ Vec3 random_on_hemisphere(const Vec3& normal) {
         return (-1)*on_unit_sphere;
     }
 }
+

@@ -34,7 +34,7 @@ int main() {
 
     // World setup
     Hittable_list world;
-    world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5, Color(1, 0, 0)));      // Red sphere
+    world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5, Color(0.1, 0.2, 0.5)));      // Red sphere
     world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100, Color(0, 1, 0))); // Green ground sphere
 
     // Rendering

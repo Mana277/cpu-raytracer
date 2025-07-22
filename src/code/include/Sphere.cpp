@@ -54,6 +54,7 @@ bool Sphere::hitRay(const Ray& ray, const Interval& ivl, Hit_record& rec) const 
 
   rec.T = t;
   rec.P = Hit_point;
+  rec.color = color;
   rec.set_face_normal(ray, Normal);
 
   return true;
