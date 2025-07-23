@@ -11,6 +11,14 @@
 #include "Hittable_list.hpp"
 #include "Interval.hpp"
 #include "Render.hpp"
+#include "Material.hpp"
+#include "Lambertian.hpp"
+#include "Metal.hpp"
+
+#define Lambert std::make_shared<Lambertian>()
+#define Metal(...) std::make_shared<Metal>(__VA_ARGS__)
+
+
 
 
 int main() {
@@ -19,7 +27,7 @@ int main() {
     Hit_record rec;
 
     // Image settings
-    int image_width = 1920;  // Test Options: 640, 1920, 7680
+    int image_width =1920;  // Test Options: 640, 1920, 7680
     int image_height = 1080; // Test Options: 360, 1080, 4320
     int c = 3; // Number of color channels (RGB)
 
@@ -34,8 +42,11 @@ int main() {
 
     // World setup
     Hittable_list world;
-    world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5, Color(0.1, 0.2, 0.5)));      // Red sphere
-    world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100, Color(0, 1, 0))); // Green ground sphere
+    world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100, Color(0.8, 0.8, 0.0), Lambert)); // Green ground sphere
+    world.add(make_shared<Sphere>(Point3(0, 0,  -1.2), 0.5, Color(0.1, 0.2, 0.5), Lambert));    
+    world.add(make_shared<Sphere>(Point3(-1.0,    0.0, -1.0), 0.5, Color(0.8, 0.8, 0.8), Metal(0.3)));   
+    world.add(make_shared<Sphere>(Point3( 1.0,    0.0, -1.0), 0.5, Color(0.8, 0.6, 0.2), Metal(1.0)));     
+    
 
     // Rendering
     Image<double> img = Render(image_width, image_height, c, cam, world);
@@ -47,3 +58,5 @@ int main() {
 
     return 0;
 }
+
+

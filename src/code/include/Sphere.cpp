@@ -5,8 +5,8 @@
 //--------------------------------
 // Constructor implementations
 //--------------------------------
-Sphere::Sphere(const Point3& c_pos, double r, const Color& col):
-center_position(c_pos), radius(r), color(col){}
+Sphere::Sphere(const Point3& c_pos, double r, const Color& col, std::shared_ptr<Material> mat):
+center_position(c_pos), radius(r), color(col), mat(mat){}
 
 //--------------------------------
 // function implementations
@@ -56,6 +56,6 @@ bool Sphere::hitRay(const Ray& ray, const Interval& ivl, Hit_record& rec) const 
   rec.P = Hit_point;
   rec.color = color;
   rec.set_face_normal(ray, Normal);
-
+  rec.mat = mat;
   return true;
 }

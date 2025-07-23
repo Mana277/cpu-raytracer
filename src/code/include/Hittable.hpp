@@ -1,9 +1,11 @@
 #pragma once 
 
 // Header contents (class and function declarations)
+#include <memory>
 #include "Ray.hpp"
 #include "Vec3.hpp"
 #include "Interval.hpp"
+#include "Material.hpp"
 
 class Hit_record {
   public:
@@ -13,6 +15,7 @@ class Hit_record {
     double T;
     bool front_face;
     Color color;
+    std::shared_ptr<Material> mat;
 
     // member function
     void set_face_normal(const Ray& r, const Vec3& outward_normal) {

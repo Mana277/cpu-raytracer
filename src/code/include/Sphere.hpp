@@ -4,12 +4,14 @@
 #include"Ray.hpp"
 #include"Hittable.hpp"
 #include "Interval.hpp"
+#include "Material.hpp"
+#include <memory>
 
 // Header contents
 class Sphere  : public Hittable{
   public:
     //Constructor 
-    Sphere(const Point3& c_pos, double r, const Color& col);
+    Sphere(const Point3& c_pos, double r, const Color& col, std::shared_ptr<Material> mat);
 
     Point3 getCenter_pos() const;
     double getRadius() const;
@@ -24,4 +26,5 @@ class Sphere  : public Hittable{
     Point3 center_position;
     double radius;
     Color color;
+    std::shared_ptr<Material> mat;
 }; 
