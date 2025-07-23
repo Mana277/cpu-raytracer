@@ -15,7 +15,7 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
     // Constants
     const double infinity = std::numeric_limits<double>::infinity();
     const Interval ray_t(0.0001, infinity);
-    const int samples = 5;
+    const int samples = 1000;
     const int Max_depth = 50;
     
 
@@ -37,7 +37,7 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
                 Ray target = cam.getRay(h,v);
 
                 // calculate color
-                color = color + Lambertian_Calculate_color(target, cam, world, Max_depth);
+                color = color + Caluculate_color(target, cam, world, Max_depth);
             }
             color = color / samples;
             color = GammaCorrection(color, 2.0);
