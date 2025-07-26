@@ -14,9 +14,11 @@
 #include "Material.hpp"
 #include "Lambertian.hpp"
 #include "Metal.hpp"
+#include "Dielectric.hpp"
 
 #define Lambert std::make_shared<Lambertian>()
 #define Metal(...) std::make_shared<Metal>(__VA_ARGS__)
+#define Glass std::make_shared<Dielectric>(1.5)
 
 
 
@@ -44,8 +46,8 @@ int main() {
     Hittable_list world;
     world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100, Color(0.8, 0.8, 0.0), Lambert)); // Green ground sphere
     world.add(make_shared<Sphere>(Point3(0, 0,  -1.2), 0.5, Color(0.1, 0.2, 0.5), Lambert));    
-    world.add(make_shared<Sphere>(Point3(-1.0,    0.0, -1.0), 0.5, Color(0.8, 0.8, 0.8), Metal(0.3)));   
-    world.add(make_shared<Sphere>(Point3( 1.0,    0.0, -1.0), 0.5, Color(0.8, 0.6, 0.2), Metal(1.0)));     
+    world.add(make_shared<Sphere>(Point3(-1.0,    0.0, -1.0), 0.5, Color(), Glass));   
+    world.add(make_shared<Sphere>(Point3( 1.0,    0.0, -1.0), 0.5, Color(0.8, 0.6, 0.2), Metal(0.5)));     
     
 
     // Rendering
