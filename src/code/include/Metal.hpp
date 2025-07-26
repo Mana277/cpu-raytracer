@@ -20,14 +20,12 @@ class Metal : public Material {
         Vec3 Normal = rec.N;
         Vec3 reflected = ray_in_dir - 2 *dot(ray_in_dir ,  Normal)* Normal;
 
-        // fuzz値に応じて反射ベクトルをランダムに少しだけずらす
-        scattered = Ray(rec.P, reflected + fuzz * random_unit_vector());
-        // 色の減衰率として、この材質のアルベドをセット
         attenuation = rec.color;
+        scattered = Ray(rec.P, reflected + fuzz * random_unit_vector());
         return (dot(scattered.getDir(), rec.N) > 0);
       }
 
     private:
       double fuzz; 
-  };
+};
 
