@@ -41,6 +41,16 @@ Designed as an educational tool to learn basic ray tracing principles while allo
 4. Execute the program by running `./my_app`.  
 5. The output image will be saved in the same directory.
 
+## Rendered Samples
+
+Here are examples of rendered outputs using this ray tracer:
+
+<p align="center">
+  <img src="./output.png" alt="Sample Render 1" width="400"/>
+  <br/>
+  <em>Figure 1: Simple scene</em>
+</p>
+
 ## References
 
 - Peter Shirley, *Ray Tracing in One Weekend*, available at [https://raytracing.github.io/books/RayTracingInOneWeekend.html](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
