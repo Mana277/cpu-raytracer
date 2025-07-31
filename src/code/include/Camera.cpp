@@ -5,8 +5,9 @@ constexpr double pi = 3.141592653589793;
 //--------------------------------
 // Constructor implementation
 //--------------------------------
-Camera::Camera(Point3 orig, Vec3 dir, Vec3 vup, double vfov_deg, double aspect_ratio, Interval rt): 
+Camera::Camera(Point3 orig, Vec3 camdir, Vec3 vup, double vfov_deg, double aspect_ratio, Interval rt): 
 origin(orig), ray_t(rt) {
+    Vec3 dir = camdir - orig;
     Point3  vewpoint_center = orig + unit_vector(dir);
     double half_vfov_rad = (vfov_deg*pi)/360;
     double vewpoint_height = 2 * tan(half_vfov_rad);
