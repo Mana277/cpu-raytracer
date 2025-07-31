@@ -9,7 +9,7 @@ class Camera {
         // Constructor 
         Camera(
             Point3 orig,
-            Vec3 dir,
+            Vec3 camdir,
             Vec3   vup, 
             double vfov_deg, 
             double aspect_ratio,
