@@ -28,7 +28,7 @@ class Dielectric : public Material {
 
             if (TIR || reflectance(cos_in, eta) > random(0, 1.0)){
                 Vec3 reflected = ray_in_dir - 2 *dot(ray_in_dir ,  Normal)* Normal;
-                scattered = Ray(rec.P, reflected +  random_unit_vector());
+                scattered = Ray(rec.P, reflected);
             }else{
                 Vec3 r_out_perp =  eta * (ray_in_dir_uni + cos_in*Normal);
                 Vec3 r_out_parallel = (- std::sqrt(std::fabs(1.0 - r_out_perp.length_squared()))) * Normal;
