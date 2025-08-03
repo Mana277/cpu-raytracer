@@ -46,7 +46,7 @@ Designed as an educational tool to learn basic ray tracing principles while allo
 Here are examples of rendered outputs using this ray tracer:
 
 <p align="center">
-  <img src="./output.png" alt="Sample Render 1" width="400"/>
+  <img src="./out.png" alt="Sample Render 1" width="400"/>
   <br/>
   <em>Figure 1: Simple scene</em>
 </p>
