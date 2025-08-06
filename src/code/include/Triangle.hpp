@@ -8,13 +8,14 @@
 #include <memory>
 
 // Header contents
-class Sphere  : public Hittable{
+class Triangle  : public Hittable{
   public:
     //Constructor 
-    Sphere(const Point3& c_pos, float r, const Color& col, std::shared_ptr<Material> mat);
+    Triangle(const Point3& A, const Point3& B, const Point3& C,  const Color& col, std::shared_ptr<Material> mat);
 
-    Point3 getCenter_pos() const;
-    float getRadius() const;
+    Point3 getA() const;
+    Point3 getB() const;
+    Point3 getC() const;
     Color getColor() const;
 
     bool hitRay(const Ray& r, const Interval& ivl, Hit_record& rec) const override;
@@ -23,8 +24,9 @@ class Sphere  : public Hittable{
 
   private:
     //member variable
-    Point3 center_position;
-    float radius;
+    Point3 A_position;
+    Point3 B_position;
+    Point3 C_position;
     Color color;
     std::shared_ptr<Material> mat;
 }; 
