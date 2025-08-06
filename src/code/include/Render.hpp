@@ -19,7 +19,7 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
     // Constants
     const double infinity = std::numeric_limits<double>::infinity();
     const Interval ray_t(0.0001, infinity);
-    const int samples = 100;
+    const int samples = 200;
     const int Max_depth = 50;
     const int samples_per_axis = static_cast<int>(sqrt(samples));
     
