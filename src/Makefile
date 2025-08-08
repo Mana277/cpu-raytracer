@@ -1,6 +1,6 @@
 # コンパイラとフラグ
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -O2 -MMD -MP
+CXXFLAGS = -std=c++11 -Wall -O3 -MMD -MP
 CPPFLAGS = -I$(SRCDIR)/include
 
 # ディレクトリとターゲット名
