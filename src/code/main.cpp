@@ -10,6 +10,7 @@
 #include "Triangle.hpp"
 #include "Plane.hpp"
 #include "Quad.hpp"
+#include "Box.hpp"
 #include "Hittable.hpp"
 #include "Hittable_list.hpp"
 #include "Interval.hpp"
@@ -38,27 +39,27 @@ int main() {
 
     // Camera settings
     Interval ray_t(0.0001, infinity);
-    Point3 cam_center(0, 0, 0);
-    Vec3 cam_dir(0, 0, -1);
+    Point3 cam_center(2, 1.0, 2);
+    Vec3 cam_dir(1, 0.8, 1);
     Vec3 cam_up(0, 1, 0);
-    double fov_deg = 50;
+    double fov_deg = 80;
     double ap = static_cast<double>(image_width) / image_height;
     Camera cam(cam_center, cam_dir, cam_up, fov_deg, ap, ray_t); 
 
     // World setup
     Hittable_list world;
-    world.add(make_shared<Plane>(Point3( 0.0, -1.0, 0.0), Vec3( 0, 1, 0), Color(0.8, 0.8, 0), Lambert));
-    world.add(make_shared<Sphere>(Point3(0.0, -0.5, -4.0), 0.5,Color(0.7, 0.3, 0.3), Lambert));
-    world.add(make_shared<Sphere>(Point3(-1.5, 0.0, -4.0), 0.5, Color(1,1,1), Glass));
-    world.add(make_shared<Sphere>(Point3(-1.5, 0.0, -4.0), -0.45, Color(1,1,1), Glass));
-    world.add(make_shared<Sphere>(Point3( 1.5, 0.0, -4.0), 0.5, Color(0.8, 0.8, 0.8), Metal(0.0)));    
-    world.add(make_shared<Quad>(
-        Point3(-1.0, -1.0, -3.0),  
-        Point3( 1.0, -1.0, -3.0), 
-        Point3( 1.0, -1.0, -5.0),  
-        Point3(-1.0, -1.0, -5.0),  
-        Color(0.8, 0.6, 0.2),
-        Metal(0.1)
+    
+    world.add(make_shared<Plane>(
+        Point3( 0, -1.0, 0),
+        Vec3( 0, 1.0, 0),
+        Color(0.8, 0.8, 0),
+        Lambert
+    ));
+    world.add(make_shared<Box>(
+        Point3(-1, -0.75, -1),
+        Point3( 1, 1.0, 1),
+        Color(1, 1, 1),
+        Lambert
     ));
 
     // Rendering
