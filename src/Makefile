@@ -1,6 +1,6 @@
 # コンパイラとフラグ
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -O3 -MMD -MP
+CXXFLAGS = -std=c++11 -Wall -O3 -MMD -MP 
 CPPFLAGS = -I$(SRCDIR)/include
 
 # ディレクトリとターゲット名
@@ -23,7 +23,7 @@ all: $(TARGET)
 
 # 実行ファイルのリンク
 $(TARGET): $(OBJS)
-	$(CXX) -o $@ $^
+	$(CXX) -o $@ $^ -fopenmp
 
 # vpath を使って各 cpp ファイルを探せるようにする
 vpath %.cpp $(sort $(dir $(SRCS)))

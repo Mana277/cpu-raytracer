@@ -7,11 +7,15 @@
 #include "Reflection.hpp"
 #include "Gamma.hpp"
 #include <cstdio>
+#include <omp.h>
 
+#include <chrono>
+#include <cstdio>
 // Header contents
 
 
 inline Image<double> Render(int image_width, int image_height, int channnels, const Camera& cam, const Hittable_list& world) {
+
     // Constants
     const double infinity = std::numeric_limits<double>::infinity();
     const Interval ray_t(0.0001, infinity);
@@ -23,8 +27,7 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
     // Class to store pixel color information (normalized)
     Image<double> img(image_width, image_height, 3);
     double* img_vec = img.getImgdata();
-    
-
+    #pragma omp parallel for schedule(guided)
     for (int y = 0; y < image_height; y++) {
         for (int x = 0; x < image_width; x++) {
             Color color(0,0,0);
@@ -53,6 +56,5 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
             img_vec[id+2] = color.B;
         }
     }
-
     return img;
 };
