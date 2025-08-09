@@ -39,7 +39,7 @@ int main() {
 
     // Camera settings
     Interval ray_t(0.0001, infinity);
-    Point3 cam_center(2, 1.0, 2);
+    Point3 cam_center(2, 1.1, 2);
     Vec3 cam_dir(1, 0.8, 1);
     Vec3 cam_up(0, 1, 0);
     double fov_deg = 80;
@@ -58,7 +58,7 @@ int main() {
     world.add(make_shared<Box>(
         Point3(-1, -0.75, -1),
         Point3( 1, 1.0, 1),
-        Color(1, 1, 1),
+        Color(0.1, 0.2, 0.5),
         Lambert
     ));
 
