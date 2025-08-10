@@ -5,8 +5,8 @@ constexpr double pi = 3.141592653589793;
 //--------------------------------
 // Constructor implementation
 //--------------------------------
-Camera::Camera(Point3 orig, Vec3 camdir, Vec3 vup, double vfov_deg, double aspect_ratio, Interval rt): 
-origin(orig), ray_t(rt) {
+Camera::Camera(Point3 orig, Vec3 camdir, Vec3 vup, double vfov_deg, double aspect_ratio, Interval rt, Color col): 
+origin(orig), ray_t(rt) , background(col) {
     Vec3 dir = camdir - orig;
     Point3  vewpoint_center = orig + unit_vector(dir);
     double half_vfov_rad = (vfov_deg*pi)/360;
@@ -20,6 +20,10 @@ origin(orig), ray_t(rt) {
 //--------------------------------
 // Member function implementations 
 //--------------------------------
+Color Camera::getBack() const{
+    return background;
+}
+
 Ray Camera::getRay(double h, double v) const{
     Point3 pixel_point = Screen_origin + h*horizontal + v*vertical;
     Vec3 ray_dir = pixel_point - origin;

@@ -19,12 +19,14 @@
 #include "Lambertian.hpp"
 #include "Metal.hpp"
 #include "Dielectric.hpp"
+#include "Light.hpp"
 
 #define Lambert std::make_shared<Lambertian>()
 #define Metal(...) std::make_shared<Metal>(__VA_ARGS__)
 #define Glass std::make_shared<Dielectric>(1.5)
 #define Airbubble std::make_shared<Dielectric>(1.00 / 1.33)
 #define Hollowglass std::make_shared<Dielectric>(1.00 / 1.50)
+#define Light std::make_shared<Light>(Color(4,4,4))
 
 
 int main() {
@@ -39,29 +41,56 @@ int main() {
 
     // Camera settings
     Interval ray_t(0.0001, infinity);
-    Point3 cam_center(2, 1.1, 2);
-    Vec3 cam_dir(1, 0.8, 1);
+    Point3 cam_center(26,3,6);
+    Vec3 cam_dir(0,2,0);
     Vec3 cam_up(0, 1, 0);
-    double fov_deg = 80;
+    double fov_deg = 20;
     double ap = static_cast<double>(image_width) / image_height;
-    Camera cam(cam_center, cam_dir, cam_up, fov_deg, ap, ray_t); 
+    Color cam_back(0,0,0);
+    Camera cam(cam_center, cam_dir, cam_up, fov_deg, ap, ray_t, cam_back); 
 
     // World setup
     Hittable_list world;
     
     world.add(make_shared<Plane>(
-        Point3( 0, -1.0, 0),
+        Point3( 0, 0, 0),
         Vec3( 0, 1.0, 0),
         Color(0.8, 0.8, 0),
         Lambert
     ));
-    world.add(make_shared<Box>(
-        Point3(-1, -0.75, -1),
-        Point3( 1, 1.0, 1),
-        Color(0.1, 0.2, 0.5),
+    world.add(make_shared<Sphere>(
+        Point3(0,2,0),
+        2,
+        Color(0.8, 0, 0),
         Lambert
     ));
-
+    world.add(make_shared<Sphere>(
+        Point3(0,2,4),
+        2,
+        Color(1, 1, 1),
+        Hollowglass
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(0,2,4),
+        1.9,
+        Color(1, 1, 1),
+        Glass
+    ));
+    world.add(make_shared<Quad>(
+        Point3(3, 1, -2),  
+        Point3(5, 1, -2),   
+        Point3(5, 3, -2),   
+        Point3(3, 3, -2),   
+        Color(4,4,4),       
+        Light           
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(0,8,0),
+        2,
+        Color(1, 1, 1),
+        Light 
+    ));
+    
     // Rendering
     Image<double> img = Render(image_width, image_height, c, cam, world);
     // Write output to file
