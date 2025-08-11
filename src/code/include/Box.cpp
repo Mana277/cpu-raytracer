@@ -4,8 +4,8 @@
 //--------------------------------
 // Constructor implementation
 //--------------------------------
-Box::Box(const Point3& min_corn, const Point3& max_corn, const Color& col, std::shared_ptr<Material> mat)
-    : box_min(min_corn), box_max(max_corn), color(col), mat(mat) {}
+Box::Box(const Point3& min_corn, const Point3& max_corn, std::shared_ptr<Material> mat, const Color& col)
+    : box_min(min_corn), box_max(max_corn), mat(mat), color(col) {}
 
 //--------------------------------
 // function implementations

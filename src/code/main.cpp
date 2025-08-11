@@ -1,98 +1,25 @@
-#include <vector>
-#include <iostream>
 #include <limits>
 #include "Image.hpp"
 #include "ImageIO.hpp"
 #include "ImageUtils.hpp"
 #include "Camera.hpp"
 #include "Color.hpp"
-#include "Sphere.hpp"
-#include "Triangle.hpp"
-#include "Plane.hpp"
-#include "Quad.hpp"
-#include "Box.hpp"
-#include "Hittable.hpp"
 #include "Hittable_list.hpp"
 #include "Interval.hpp"
 #include "Render.hpp"
-#include "Material.hpp"
-#include "Lambertian.hpp"
-#include "Metal.hpp"
-#include "Dielectric.hpp"
-#include "Light.hpp"
-
-#define Lambert std::make_shared<Lambertian>()
-#define Metal(...) std::make_shared<Metal>(__VA_ARGS__)
-#define Glass std::make_shared<Dielectric>(1.5)
-#define Airbubble std::make_shared<Dielectric>(1.00 / 1.33)
-#define Hollowglass std::make_shared<Dielectric>(1.00 / 1.50)
-#define Light std::make_shared<Light>(Color(4,4,4))
-
+#include "Sample_Scenes.hpp"
 
 int main() {
     // Constants
-    const double infinity = std::numeric_limits<double>::infinity();
-    Hit_record rec;
-
-    // Image settings
-    int image_width =  640;  // Test Options: 640, 1920, 7680
-    int image_height = 360; // Test Options: 360, 1080, 4320
-    int c = 3; // Number of color channels (RGB)
-
-    // Camera settings
-    Interval ray_t(0.0001, infinity);
-    Point3 cam_center(26,3,6);
-    Vec3 cam_dir(0,2,0);
-    Vec3 cam_up(0, 1, 0);
-    double fov_deg = 20;
-    double ap = static_cast<double>(image_width) / image_height;
-    Color cam_back(0,0,0);
-    Camera cam(cam_center, cam_dir, cam_up, fov_deg, ap, ray_t, cam_back); 
-
-    // World setup
+    Camera cam;
     Hittable_list world;
     
-    world.add(make_shared<Plane>(
-        Point3( 0, 0, 0),
-        Vec3( 0, 1.0, 0),
-        Color(0.8, 0.8, 0),
-        Lambert
-    ));
-    world.add(make_shared<Sphere>(
-        Point3(0,2,0),
-        2,
-        Color(0.8, 0, 0),
-        Lambert
-    ));
-    world.add(make_shared<Sphere>(
-        Point3(0,2,4),
-        2,
-        Color(1, 1, 1),
-        Hollowglass
-    ));
-    world.add(make_shared<Sphere>(
-        Point3(0,2,4),
-        1.9,
-        Color(1, 1, 1),
-        Glass
-    ));
-    world.add(make_shared<Quad>(
-        Point3(3, 1, -2),  
-        Point3(5, 1, -2),   
-        Point3(5, 3, -2),   
-        Point3(3, 3, -2),   
-        Color(4,4,4),       
-        Light           
-    ));
-    world.add(make_shared<Sphere>(
-        Point3(0,8,0),
-        2,
-        Color(1, 1, 1),
-        Light 
-    ));
-    
+    //set scenes
+    set_scene2(cam, world);
+
     // Rendering
     Image<double> img = Render(image_width, image_height, c, cam, world);
+
     // Write output to file
     Image<unsigned char> buffer = convert_to_uchar(img);
     const char* f = "out.png";

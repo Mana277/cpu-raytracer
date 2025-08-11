@@ -17,16 +17,14 @@
 inline Image<double> Render(int image_width, int image_height, int channnels, const Camera& cam, const Hittable_list& world) {
 
     // Constants
-    const double infinity = std::numeric_limits<double>::infinity();
-    const Interval ray_t(0.0001, infinity);
-    const int samples = 2000;
+    const int samples = 1000;
     const int Max_depth = 50;
     const int samples_per_axis = static_cast<int>(sqrt(samples));
     
-
     // Class to store pixel color information (normalized)
     Image<double> img(image_width, image_height, 3);
     double* img_vec = img.getImgdata();
+
     #pragma omp parallel for schedule(guided)
     for (int y = 0; y < image_height; y++) {
         for (int x = 0; x < image_width; x++) {

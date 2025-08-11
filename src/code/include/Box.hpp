@@ -8,7 +8,7 @@
 class Box : public Hittable {
 public:
     // Constructor
-    Box(const Point3& min_corn, const Point3& max_corn, const Color& col, std::shared_ptr<Material> mat);
+    Box(const Point3& min_corn, const Point3& max_corn, std::shared_ptr<Material> mat, const Color& col = Color(1.0, 0.0 , 1.0));
 
     Point3 getMin() const;
     Point3 getMax() const;
@@ -20,6 +20,6 @@ private:
     //member variable
     Point3 box_min; 
     Point3 box_max; 
-    Color color;
     std::shared_ptr<Material> mat;
+    Color color;
 };

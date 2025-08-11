@@ -11,7 +11,7 @@
 class Triangle  : public Hittable{
   public:
     //Constructor 
-    Triangle(const Point3& A, const Point3& B, const Point3& C,  const Color& col, std::shared_ptr<Material> mat);
+    Triangle(const Point3& A, const Point3& B, const Point3& C, std::shared_ptr<Material> mat,  const Color& col = Color(1.0, 0.0 , 1.0));
 
     Point3 getA() const;
     Point3 getB() const;
@@ -27,6 +27,6 @@ class Triangle  : public Hittable{
     Point3 A_position;
     Point3 B_position;
     Point3 C_position;
-    Color color;
     std::shared_ptr<Material> mat;
+    Color color;
 }; 

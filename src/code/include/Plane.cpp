@@ -4,8 +4,8 @@
 //--------------------------------
 // Constructor implementations
 //--------------------------------
-Plane::Plane(const Point3& plane_orig, const Vec3& normal, const Color& col, std::shared_ptr<Material> mat)
-    : plane_origin(plane_orig), Normal(unit_vector(normal)), color(col), mat(mat) {} 
+Plane::Plane(const Point3& plane_orig, const Vec3& normal, std::shared_ptr<Material> mat, const Color& col)
+    : plane_origin(plane_orig), Normal(unit_vector(normal)), mat(mat), color(col) {} 
 
 //--------------------------------
 // function implementations
