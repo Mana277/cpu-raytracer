@@ -7,8 +7,8 @@
 //--------------------------------
 // Constructor implementations
 //--------------------------------
-Quad::Quad(const Point3& A, const Point3& B, const Point3& C, const Point3& D, const Color& col, std::shared_ptr<Material> mat):
-A_position(A) ,B_position(B) ,C_position(C) ,D_position(D) , color(col), mat(mat), triangle1(Triangle(A,B,C,col,mat)),triangle2(Triangle(A,C,D,col,mat)){}
+Quad::Quad(const Point3& A, const Point3& B, const Point3& C, const Point3& D, std::shared_ptr<Material> mat, const Color& col):
+A_position(A) ,B_position(B) ,C_position(C) ,D_position(D) , mat(mat), color(col), triangle1(Triangle(A,B,C,mat,col)),triangle2(Triangle(A,C,D,mat,col)){}
 
 //--------------------------------
 // function implementations

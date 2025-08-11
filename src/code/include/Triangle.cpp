@@ -5,8 +5,8 @@
 //--------------------------------
 // Constructor implementations
 //--------------------------------
-Triangle::Triangle(const Point3& A, const Point3& B, const Point3& C, const Color& col, std::shared_ptr<Material> mat):
-A_position(A) ,B_position(B) ,C_position(C) , color(col), mat(mat){}
+Triangle::Triangle(const Point3& A, const Point3& B, const Point3& C, std::shared_ptr<Material> mat, const Color& col):
+A_position(A) ,B_position(B) ,C_position(C) , mat(mat), color(col){}
 
 //--------------------------------
 // function implementations

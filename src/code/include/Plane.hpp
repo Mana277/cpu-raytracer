@@ -11,7 +11,7 @@
 class Plane  : public Hittable{
   public:
     //Constructor 
-    Plane(const Point3& plane_orig, const Vec3& normal, const Color& col, std::shared_ptr<Material> mat);
+    Plane(const Point3& plane_orig, const Vec3& normal, std::shared_ptr<Material> mat, const Color& col = Color(1.0, 0.0 , 1.0));
 
     Point3 getOrig() const;
     Vec3 getNormal() const;
@@ -24,6 +24,6 @@ class Plane  : public Hittable{
     //member variable
     Point3 plane_origin;
     Vec3 Normal;
-    Color color;
     std::shared_ptr<Material> mat;
+    Color color;
 }; 

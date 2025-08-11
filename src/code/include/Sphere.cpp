@@ -5,8 +5,8 @@
 //--------------------------------
 // Constructor implementations
 //--------------------------------
-Sphere::Sphere(const Point3& c_pos, float r, const Color& col, std::shared_ptr<Material> mat):
-center_position(c_pos), radius(r), color(col), mat(mat){}
+Sphere::Sphere(const Point3& c_pos, float r, std::shared_ptr<Material> mat, const Color& col):
+center_position(c_pos), radius(r), mat(mat), color(col){}
 
 //--------------------------------
 // function implementations

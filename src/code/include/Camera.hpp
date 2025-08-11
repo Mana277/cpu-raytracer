@@ -7,7 +7,8 @@
 
 class Camera {
     public:
-        // Constructor 
+        // Constructor
+        Camera() = default; 
         Camera(
             Point3 orig,
             Vec3 camdir,
@@ -25,10 +26,10 @@ class Camera {
     
     private:
         //member variable
-        Point3 origin;
-        Point3 Screen_origin;
-        Vec3   horizontal;
-        Vec3   vertical;
-        Interval ray_t;
-        Color  background;
+        Point3 origin = Point3(0,0,0);  
+        Point3 Screen_origin = Point3(0,0,0);
+        Vec3 horizontal = Vec3(1,0,0);
+        Vec3 vertical = Vec3(0,1,0);
+        Interval ray_t = Interval(0.0, 1.0);
+        Color background = Color(0.0, 0.0, 0.0);
 }; 

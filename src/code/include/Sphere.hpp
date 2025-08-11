@@ -11,7 +11,7 @@
 class Sphere  : public Hittable{
   public:
     //Constructor 
-    Sphere(const Point3& c_pos, float r, const Color& col, std::shared_ptr<Material> mat);
+    Sphere(const Point3& c_pos, float r, std::shared_ptr<Material> mat, const Color& col = Color(1.0, 0.0 , 1.0));
 
     Point3 getCenter_pos() const;
     float getRadius() const;
@@ -25,6 +25,6 @@ class Sphere  : public Hittable{
     //member variable
     Point3 center_position;
     float radius;
-    Color color;
     std::shared_ptr<Material> mat;
+    Color color;
 }; 

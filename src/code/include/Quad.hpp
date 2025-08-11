@@ -8,7 +8,7 @@
 class Quad : public Hittable {
 public:
     //Constructor 
-    Quad(const Point3& A, const Point3& B, const Point3& C, const Point3& D, const Color& col, std::shared_ptr<Material> mat);
+    Quad(const Point3& A, const Point3& B, const Point3& C, const Point3& D, std::shared_ptr<Material> mat, const Color& col = Color(1.0, 0.0 , 1.0));
 
     Point3 getA() const;
     Point3 getB() const;
@@ -23,8 +23,8 @@ private:
     Point3 B_position;
     Point3 C_position;
     Point3 D_position;
-    Color color;
     std::shared_ptr<Material> mat;
+    Color color;
     Triangle triangle1;
     Triangle triangle2;
 };
