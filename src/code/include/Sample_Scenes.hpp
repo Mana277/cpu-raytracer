@@ -24,7 +24,7 @@ using namespace std;
 #define LAMBERT make_shared<Lambertian>()
 #define METAL(...) make_shared<Metal>(__VA_ARGS__)
 #define GLASS make_shared<Dielectric>(1.5)
-#define AIRBUBBLE make_shared<Dielectric>(1.00 / 1.33)
+#define AIRBUBBLE make_shared<Dielectric>(1 / 1.33)
 #define HOLLOWGLASS make_shared<Dielectric>(1.00 / 1.50)
 #define LIGHT make_shared<Light>(Color(4,4,4))
 #define BRIGHTLIGHT make_shared<Light>(Color(15,15,15))
@@ -70,12 +70,7 @@ void set_scene1(Camera& cam, Hittable_list& world){
     world.add(make_shared<Sphere>(
         Point3(0,2,4),
         2,
-        HOLLOWGLASS
-    ));
-    world.add(make_shared<Sphere>(
-        Point3(0,2,4),
-        1.95,
-        GLASS
+        AIRBUBBLE
     ));
     world.add(make_shared<Quad>(
         Point3(3, 1, -2),  
