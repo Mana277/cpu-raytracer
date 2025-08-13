@@ -7,6 +7,7 @@
     	</tr>
   	</thead>
 </table>
+
 ## 1. Introduction
 This project is a CPU-based ray tracer implemented in C++.
 
