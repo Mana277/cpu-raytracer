@@ -6,7 +6,7 @@
 #include "Vec3.hpp"
 
 // Header contents
-Color Caluculate_color(const Ray& target, const Camera& cam, const Hittable_list& world, int depth){
+Color Calculate_color(const Ray& target, const Camera& cam, const Hittable_list& world, int depth){
     
     if (depth <= 0) {
         return Color(0, 0, 0);
@@ -26,6 +26,6 @@ Color Caluculate_color(const Ray& target, const Camera& cam, const Hittable_list
         return color_emitted;
     }
 
-    Color color_scatter = attenuation * Caluculate_color(scattered, cam, world ,depth - 1);
+    Color color_scatter = attenuation * Calculate_color(scattered, cam, world ,depth - 1);
     return color_emitted + color_scatter;
 }
