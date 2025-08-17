@@ -15,7 +15,7 @@ int main() {
     Hittable_list world;
     
     //set scenes
-    set_scene1(cam, world);
+    set_scene3(cam, world);
 
     // Rendering
     Image<double> img = Render(image_width, image_height, c, cam, world);

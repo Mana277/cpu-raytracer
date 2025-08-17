@@ -17,7 +17,7 @@
 inline Image<double> Render(int image_width, int image_height, int channnels, const Camera& cam, const Hittable_list& world) {
 
     // Constants
-    const int samples = 10000;
+    const int samples = 1000;
     const int Max_depth = 50;
     const int samples_per_axis = static_cast<int>(sqrt(samples));
     
@@ -41,7 +41,7 @@ inline Image<double> Render(int image_width, int image_height, int channnels, co
                     Ray target = cam.getRay(h,v);
 
                     // calculate color
-                    color = color + Caluculate_color(target, cam, world, Max_depth);
+                    color = color + Calculate_color(target, cam, world, Max_depth);
                 }
             }
             color = color / samples;

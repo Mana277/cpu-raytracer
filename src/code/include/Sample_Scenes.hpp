@@ -28,10 +28,11 @@ using namespace std;
 #define HOLLOWGLASS make_shared<Dielectric>(1.00 / 1.50)
 #define LIGHT make_shared<Light>(Color(4,4,4))
 #define BRIGHTLIGHT make_shared<Light>(Color(15,15,15))
+#define SUN make_shared<Light>(Color(20,18,16))
 
 // Image settings
-constexpr int image_width =  1920;  // Test Options: 640, 1920, 7680
-constexpr int image_height = 1080; // Test Options: 360, 1080, 4320
+constexpr int image_width =  640;  // Test Options: 640, 1920, 7680
+constexpr int image_height = 360; // Test Options: 360, 1080, 4320
 constexpr int c = 3; // Number of color channels (RGB) ***This change may have a system-wide impact.***
 
 
@@ -172,4 +173,54 @@ void set_scene2(Camera& cam, Hittable_list& world){
         BRIGHTLIGHT           
     ));
     
+};
+
+
+//--------------------------------
+//Add Sun
+//--------------------------------
+void set_scene3(Camera& cam, Hittable_list& world){ 
+    const double infinity = std::numeric_limits<double>::infinity();
+
+    // Camera settings
+    Point3 cam_center(26,3,6);
+    Vec3 cam_dir(0,2,0);
+    Vec3 cam_up(0, 1, 0);
+    double fov_deg = 20;
+    double ap = static_cast<double>(image_width) / image_height;
+    Interval ray_t(0.0001, infinity);
+    Color cam_back(0,0,0);
+
+    cam = Camera(cam_center, cam_dir, cam_up, fov_deg, ap, ray_t, cam_back); 
+
+    // World setup
+    world.add(make_shared<Plane>(
+        Point3( 0, 0, 0),
+        Vec3( 0, 1.0, 0),
+        LAMBERT,
+        Color(0.8, 0.8, 0)
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(0,2,0),
+        2,
+        LAMBERT,
+        Color(0.1, 0.2, 0.5)
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(2,2,4),
+        2,
+        METAL(1.0),
+        Color(0.8, 0.6, 0.2)
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(-2,2,4),
+        2,
+        METAL(0.3),
+        Color(0.8, 0.8, 0.8)
+    ));
+    world.add(make_shared<Sphere>(
+        Point3(0, 100, -200),
+        50,
+        SUN
+    ));
 };
